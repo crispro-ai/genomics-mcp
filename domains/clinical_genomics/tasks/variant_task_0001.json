@@ -1,0 +1,29 @@
+{
+    "category": "variant_interpretation",
+    "question": "Classify the pathogenicity of variant BRCA1 c.5266dupC (p.Gln1756Profs*74) found in a patient with family history of breast cancer. Use ACMG/AMP guidelines and provide: (1) pathogenicity classification (5-tier), (2) evidence codes (e.g., PVS1, PM2), (3) confidence score (0-1), and (4) clinical recommendation.",
+    "output_format": {
+        "variant": "BRCA1 c.5266dupC",
+        "pathogenicity": "[Pathogenic/Likely Pathogenic/VUS/Likely Benign/Benign]",
+        "evidence_codes": ["[code1]", "[code2]"],
+        "evidence_summary": "[Explanation of each code]",
+        "confidence": "[0.0-1.0]",
+        "clinical_recommendation": "[Action to take]",
+        "references": ["[ClinVar ID or PMID]"]
+    },
+    "use_specified_server": true,
+    "mcp_servers": [
+        {"name": "clinvar-api"},
+        {"name": "pubmed-search"}
+    ],
+    "evaluators": [{
+        "func": "raw",
+        "op": "clinical_genomics.validate_variant_classification",
+        "op_args": {
+            "expected_tier": "Pathogenic",
+            "expected_codes": ["PVS1", "PM2", "PP3"],
+            "min_confidence": 0.8,
+            "must_have_reference": true
+        }
+    }]
+}
+

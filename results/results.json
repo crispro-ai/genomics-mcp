@@ -1,0 +1,14 @@
+[
+  {
+    "task": "variant_task_0001",
+    "runs": [
+      {
+        "run": 1,
+        "passed": false,
+        "error": "No module named 'domains.clinical_genomics'"
+      }
+    ],
+    "pass_at_1": false,
+    "pass_at_k": false
+  }
+]

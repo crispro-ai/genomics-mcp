@@ -1,0 +1,8 @@
+{
+  "domain": "clinical_genomics",
+  "total_tasks": 1,
+  "runs_per_task": 1,
+  "pass_at_1": 0.0,
+  "pass_at_k": 0.0,
+  "categories": []
+}

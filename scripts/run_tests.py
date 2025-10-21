@@ -21,7 +21,15 @@ def load_domain_config(domain: str) -> Dict[str, Any]:
     """Load domain configuration."""
     config_path = Path(f"domains/{domain}/config.yaml")
     with open(config_path) as f:
-        return yaml.safe_load(f)
+        # Load all documents in multi-document YAML
+        docs = list(yaml.safe_load_all(f))
+        # Combine into single config dict
+        config = {}
+        for doc in docs:
+            if doc and 'spec' in doc:
+                kind = doc.get('kind', 'unknown')
+                config[kind] = doc['spec']
+        return config
 
 
 def load_task(task_path: str) -> Dict[str, Any]:
@@ -131,7 +139,8 @@ def run_tests(domain: str, runs: int = 3, output_dir: str = "results/") -> Dict[
     
     # Load config
     config = load_domain_config(domain)
-    tasks = config.get("tasks", [])
+    benchmark_config = config.get("benchmark", {})
+    tasks = benchmark_config.get("tasks", [])
     
     # Create output directory
     output_path = Path(output_dir)
